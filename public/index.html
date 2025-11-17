@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Hesham Hamdy — One-to-One Media Buying Course</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <h1>Hesham Hamdy</h1>
+      <p class="tagline">One-to-One Media Buying Course — Snapchat, Meta, TikTok & Google Ads</p>
+      <p class="cta-sub">One-on-one mentoring to build high-performing cross-platform ad campaigns.</p>
+      <button id="enrollBtn" class="btn primary">Enroll Now</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="about">
+      <div class="bio">
+        <h2>About Hesham</h2>
+        <p>Senior Digital Marketing Specialist, Front-End Designer, and Instructor with over 12 years of experience. I specialize in ads management, content strategy, branding, lead generation, viral marketing, affiliate marketing, ROI analysis, web design, and graphic design.</p>
+      </div>
+      <div class="quick-list">
+        <h3>Course Highlights</h3>
+        <ul>
+          <li>Hands-on campaigns across Snapchat, Meta, TikTok, and Google Ads</li>
+          <li>Cross-platform optimization, attribution, and AI-driven strategies</li>
+          <li>Final live project + certification</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="curriculum">
+      <h2>Curriculum</h2>
+      <div class="modules">
+        <article>
+          <h4>Introduction to Media Buying</h4>
+          <p>Definition, role of the media buyer, and platform overview.</p>
+        </article>
+        <article>
+          <h4>Module 1 — Snapchat Ads</h4>
+          <p>Snapchat Ads Manager, formats, targeting, optimization, reporting, hands-on exercises.</p>
+        </article>
+        <article>
+          <h4>Module 2 — Meta Ads (Facebook & Instagram)</h4>
+          <p>Meta Ads Manager, objectives, audiences, pixel & CAPI, creative, ROI measurement.</p>
+        </article>
+        <article>
+          <h4>Module 3 — TikTok Ads</h4>
+          <p>TikTok Ads Manager, ad formats, creative tips, optimization, case studies.</p>
+        </article>
+        <article>
+          <h4>Module 4 — Google Ads</h4>
+          <p>Search, Display, YouTube: keywords, targeting, bidding, analytics.</p>
+        </article>
+        <article>
+          <h4>Module 5 — Advanced Strategies</h4>
+          <p>Cross-platform attribution, AI & automation, budget allocation, emerging trends.</p>
+        </article>
+        <article>
+          <h4>Final Project & Certification</h4>
+          <p>Build and optimize a live cross-platform campaign; certification on successful completion.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="testimonial-cta">
+      <h3>Ready to level up your media buying skills?</h3>
+      <button id="enrollBtn2" class="btn primary">Enroll Now</button>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© Hesham Hamdy — Media Buying Course</p>
+    </div>
+  </footer>
+
+  <!-- Modal form -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button id="closeModal" class="modal-close" aria-label="Close">✕</button>
+      <h2 id="modalTitle">Apply — One-to-One Media Buying</h2>
+      <form id="applyForm">
+        <div class="field">
+          <label for="name">Full name *</label>
+          <input id="name" name="name" required />
+        </div>
+        <div class="field">
+          <label for="email">Email *</label>
+          <input id="email" name="email" type="email" required />
+        </div>
+        <div class="field">
+          <label for="phone">Phone / WhatsApp</label>
+          <input id="phone" name="phone" />
+        </div>
+        <div class="field">
+          <label for="experience">Experience level</label>
+          <select id="experience" name="experience">
+            <option>Beginner</option>
+            <option>Intermediate</option>
+            <option>Advanced</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="goals">Goals / Brief</label>
+          <textarea id="goals" name="goals" rows="3" placeholder="What do you want to achieve?"></textarea>
+        </div>
+
+        <fieldset class="field">
+          <legend>Platforms of interest</legend>
+          <label><input type="checkbox" name="platforms" value="Snapchat" /> Snapchat</label>
+          <label><input type="checkbox" name="platforms" value="Meta" /> Meta (Facebook & Instagram)</label>
+          <label><input type="checkbox" name="platforms" value="TikTok" /> TikTok</label>
+          <label><input type="checkbox" name="platforms" value="Google" /> Google Ads</label>
+        </fieldset>
+
+        <div class="field">
+          <label>Preferred session times (select any)</label>
+          <label><input type="checkbox" name="preferred_times" value="Weekdays" /> Weekdays</label>
+          <label><input type="checkbox" name="preferred_times" value="Weekends" /> Weekends</label>
+          <label><input type="checkbox" name="preferred_times" value="Mornings" /> Mornings</label>
+          <label><input type="checkbox" name="preferred_times" value="Afternoons" /> Afternoons</label>
+          <label><input type="checkbox" name="preferred_times" value="Evenings" /> Evenings</label>
+        </div>
+
+        <div class="field">
+          <label for="timezone">Your timezone</label>
+          <input id="timezone" name="timezone" readonly />
+        </div>
+
+        <div class="field">
+          <label class="consent"><input id="consent" name="consent" type="checkbox" required /> I consent to be contacted regarding this application.</label>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn primary">Submit Application</button>
+          <button type="button" id="cancelBtn" class="btn">Cancel</button>
+        </div>
+
+        <div id="formMessage" class="form-message" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>

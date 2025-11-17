@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Admin — Applications</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    body{font-family:system-ui,Segoe UI,Roboto,Arial;margin:20px;background:#f5f7fa;color:#0b1220}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:8px;border-bottom:1px solid #e6ebf2;text-align:left}
+    th{background:#eef4fb}
+    .filters{margin-bottom:12px}
+    .btn{padding:8px 12px;border-radius:8px;border:0;background:#0b63ff;color:white;cursor:pointer}
+  </style>
+</head>
+<body>
+  <h1>Applications</h1>
+  <div class="filters">
+    <button id="refresh" class="btn">Refresh</button>
+    <button id="exportCsv" class="btn" style="background:#10b981">Export CSV</button>
+  </div>
+  <div id="list">Loading…</div>
+
+  <script>
+    async function fetchApps() {
+      // Try using same-origin credentials; the server expects Basic Auth header.
+      const resp = await fetch('/api/applications', {credentials: 'same-origin'});
+      if (resp.status === 401) {
+        // Ask for username/password and retry with Basic Auth header
+        const user = prompt('Admin username:');
+        const pass = prompt('Admin password:');
+        if (!user) return;
+        const token = btoa(user + ':' + pass);
+        const r2 = await fetch('/api/applications', {headers: {Authorization: 'Basic ' + token}});
+        return [r2, token];
+      }
+      return [resp, null];
+    }
+
+    async function load() {
+      const [resp, token] = await fetchApps();
+      if (!resp) { document.getElementById('list').textContent = 'Unauthorized'; return; }
+      if (resp.status !== 200) {
+        document.getElementById('list').textContent = 'Failed to load applications';
+        return;
+      }
+      const data = await resp.json();
+      const apps = data.applications || [];
+      if (!apps.length) {
+        document.getElementById('list').textContent = 'No applications yet.';
+        return;
+      }
+      let html = '<table><thead><tr><th>When</th><th>Name</th><th>Email</th><th>Phone</th><th>Experience</th><th>Platforms</th><th>Preferred times</th><th>Goals</th></tr></thead><tbody>';
+      for (const a of apps) {
+        html += `<tr>
+          <td>${new Date(a.created_at).toLocaleString()}</td>
+          <td>${escapeHtml(a.name)}</td>
+          <td>${escapeHtml(a.email)}</td>
+          <td>${escapeHtml(a.phone || '')}</td>
+          <td>${escapeHtml(a.experience || '')}</td>
+          <td>${escapeHtml((a.platforms || []).join(', '))}</td>
+          <td>${escapeHtml((a.preferred_times || []).join(', '))}</td>
+          <td>${escapeHtml(a.goals || '')}</td>
+        </tr>`;
+      }
+      html += '</tbody></table>';
+      document.getElementById('list').innerHTML = html;
+
+      // attach export
+      document.getElementById('exportCsv').onclick = () => {
+        const csv = toCsv(apps);
+        const blob = new Blob([csv], {type:'text/csv'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = 'applications.csv'; a.click();
+        URL.revokeObjectURL(url);
+      };
+    }
+
+    function escapeHtml(s=''){ return s.replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;'); }
+    function toCsv(rows){
+      const headers = ['created_at','name','email','phone','experience','platforms','preferred_times','goals'];
+      const lines = [headers.join(',')];
+      for (const r of rows) {
+        const line = [
+          `"${r.created_at || ''}"`,
+          `"${(r.name||'').replace(/"/g,'""')}"`,
+          `"${(r.email||'').replace(/"/g,'""')}"`,
+          `"${(r.phone||'').replace(/"/g,'""')}"`,
+          `"${(r.experience||'').replace(/"/g,'""')}"`,
+          `"${((r.platforms||[]).join('|')||'').replace(/"/g,'""')}"`,
+          `"${((r.preferred_times||[]).join('|')||'').replace(/"/g,'""')}"`,
+          `"${(r.goals||'').replace(/"/g,'""')}"`
+        ].join(',');
+        lines.push(line);
+      }
+      return lines.join('\n');
+    }
+
+    document.getElementById('refresh').addEventListener('click', load);
+    load();
+  </script>
+</body>
+</html>

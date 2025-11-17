@@ -1,0 +1,50 @@
+/* Simple modern styles */
+:root{
+  --bg:#0f1724;
+  --card:#0b1220;
+  --accent:#00c2a8;
+  --muted:#9aa4b2;
+  --white:#f8fafc;
+  --glass: rgba(255,255,255,0.03);
+  --radius:12px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(180deg,#071028 0%, #071021 60%);color:var(--white);-webkit-font-smoothing:antialiased;}
+.container{max-width:1100px;margin:0 auto;padding:28px;}
+
+.hero{padding:64px 0;background:linear-gradient(90deg, rgba(0,194,168,0.07), rgba(0,122,255,0.03));border-bottom:1px solid rgba(255,255,255,0.03);}
+.hero h1{margin:0;font-size:36px;letter-spacing:-0.5px}
+.tagline{color:var(--accent);font-weight:600;margin:8px 0}
+.cta-sub{color:var(--muted);margin-bottom:18px}
+.btn{padding:10px 16px;border-radius:10px;border:0;cursor:pointer;background:transparent;color:var(--white);font-weight:600}
+.btn.primary{background:linear-gradient(90deg,var(--accent),#3a86ff);color:#04111a;box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+.about{display:grid;grid-template-columns:2fr 1fr;gap:24px;margin-top:24px}
+.about p{color:var(--muted)}
+.quick-list ul{padding-left:18px}
+.curriculum{margin-top:36px}
+.modules{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.modules article{background:var(--glass);padding:14px;border-radius:12px;border:1px solid rgba(255,255,255,0.02)}
+.testimonial-cta{margin:40px 0;padding:20px;border-radius:12px;background:linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));text-align:center}
+footer{padding:24px 0;color:var(--muted);font-size:14px;text-align:center}
+
+/* Modal */
+.modal{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:radial-gradient(circle at center, rgba(2,6,23,0.6), rgba(2,6,23,0.8));padding:24px}
+.modal[aria-hidden="false"]{display:flex}
+.modal-panel{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:14px;width:100%;max-width:720px;position:relative;border:1px solid rgba(255,255,255,0.03)}
+.modal-close{position:absolute;right:12px;top:12px;background:transparent;border:0;color:var(--muted);font-size:18px;cursor:pointer}
+
+/* form */
+.field{margin-bottom:12px;display:flex;flex-direction:column}
+.field label{margin-bottom:6px;color:var(--muted);font-size:14px}
+input[type="text"],input[type="email"],select,textarea{padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--white)}
+textarea{resize:vertical}
+fieldset.field{border:0;padding:0;margin:0}
+fieldset.field label{display:inline-block;margin-right:10px;color:var(--muted)}
+.form-actions{display:flex;gap:12px;margin-top:10px}
+.form-message{margin-top:12px;color:var(--muted)}
+.consent{font-size:14px;color:var(--muted)}
+@media (max-width:800px){
+  .about{grid-template-columns:1fr}
+}
